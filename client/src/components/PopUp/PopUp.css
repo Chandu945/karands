@@ -1,0 +1,36 @@
+.popup-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0px;
+    top: -300%;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    transition: top 1s ease-in;
+}
+
+.create-post-form{
+    width: 40vw;
+    min-height: 500px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px;
+    position: relative;
+}
+
+.create-post-form>.input{
+    padding: 10px;
+}
+
+.create-post-form>.fa-times{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
