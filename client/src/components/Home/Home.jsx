@@ -35,7 +35,7 @@ const Home = ()=>{
         <>
             <Navbar modal={popUp}/>
             <div ref={popUp} className="popup-container">
-                <PopUp modal={popUp}/>
+                <PopUp modal={popUp} fetchPosts={fetchPosts}/>
             </div>
             <main className="posts-container">
                 {

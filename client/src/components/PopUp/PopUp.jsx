@@ -3,7 +3,7 @@ import { useState } from "react";
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 
-const PopUp = ({modal})=>{
+const PopUp = ({modal, fetchPosts})=>{
 
     const [data, setData] = useState({
         title: "",
@@ -40,6 +40,13 @@ const PopUp = ({modal})=>{
             toast.dismiss()
             if (result.status) {
                 toast.success(result.message);
+                fetchPosts();
+                closeModal();
+                setData({
+                    title: "",
+                    description: ""
+                })
+                setImage("")
             }else{
                 toast.error(result.message);
             }
