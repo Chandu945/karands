@@ -3,14 +3,17 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const {upload, resizeImage} = require('../middlewares/uploadImages');
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 //Route-1: Register a new user
-router.post('/register', async(req, res)=>{
+router.post('/register',upload.any('image') ,async(req, res)=>{
 
     try {
+        const result = await resizeImage(req.files[0].path);
+
         const {name, email, password} = req.body;
         //checking if email already exist in database
         let user = await User.findOne({email})
@@ -24,7 +27,7 @@ router.post('/register', async(req, res)=>{
         const hash = await bcrypt.hash(password, 10);
         //creating new user
         user = await User.create({
-            name, email, 'password': hash
+            name, email, 'password': hash, 'profilePic': result.url
         });
 
         return res.status(201).json({

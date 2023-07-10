@@ -49,7 +49,7 @@ router.get('/',async(req, res)=>{
 //Route 3 : Getting all the posts
 router.get('/all', async(req, res)=>{
     //to add serach bar in page 14
-    const {page=1, size=10} = req.query;
+    const {page=1, size=20} = req.query;
     try {
         let posts = await Post.find().populate('postedBy').skip((page - 1)*size).limit(size).sort({createdAt: -1});
         

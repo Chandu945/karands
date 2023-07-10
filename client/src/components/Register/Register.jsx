@@ -9,26 +9,26 @@ const Register = () => {
         name: "",
         email: "",
         password: "",
-        conPass: ""
+        conPass: "",
+        image: ""
     })
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         toast.loading('Loading...')
         e.preventDefault();
+        const formdata = new FormData();
+        formdata.append("name", data.name);
+        formdata.append("email", data.email);
+        formdata.append("password", data.password);
+        formdata.append("image", data.image);
+
         let url = process.env.REACT_APP_HOST +'user/register';
         try {
             const res = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: JSON.stringify({
-                    name:data.name,
-                    email: data.email,
-                    password: data.password
-                })
+                mode: 'cors',
+                body: formdata
             })
             const result = await res.json();
             toast.dismiss()
@@ -58,6 +58,13 @@ const Register = () => {
                     placeholder="Name"
                     autoComplete="off"
                     required
+                />
+                <input
+                    className="input"
+                    type="file"
+                    onChange={(e) => setData({ ...data, image: e.target.files[0] })}
+                    placeholder="Profile picture"
+                    autoComplete="off"
                 />
                 <input
                     className="input"

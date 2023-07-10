@@ -22,5 +22,8 @@ app.use('/post', [fetchUser, postRoutes]);
 const commentRoutes = require('./src/routes/comment');
 app.use('/comment', [fetchUser, commentRoutes]);
 
+const followRoutes = require('./src/routes/follow');
+app.use('/follow', [fetchUser, followRoutes]);
+
 
 module.exports = app;
