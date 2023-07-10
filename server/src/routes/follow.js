@@ -113,6 +113,7 @@ router.get("/suggestions", async(req,res) => {
         const follow = await Follow.find({followedBy: req.user},{followedTo: 1, _id: 0})
 
         const filterArr = follow.map((obj)=> obj.followedTo)
+        filterArr.push(req.user);
 
         const users = await User.find({_id: { $nin: filterArr}})        
 
